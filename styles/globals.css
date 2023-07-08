@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+    scroll-behavior: smooth !important;
+}
+
+@layer utilities {
+    .overflow-unset {
+        overflow: unset;
+    }
+}
+
+.Toastify {
+    &__toast {
+        border-radius: 28px;
+    }
+    &__toast-body {
+        display: flex;
+    }
+    &__toast-icon {
+        width: 20px;
+    }
+}

@@ -1,0 +1,60 @@
+stages:
+  - test
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .next/cache/
+
+test:build:
+  stage: test
+  allow_failure: false
+  script:
+    - echo Budowanie aplikacji na środowisko $CI_COMMIT_BRANCH
+    - echo CI_COMMIT_REF_SLUG $CI_COMMIT_REF_SLUG
+    - source ~/.bashrc
+    - nvm install 18.12.1
+    - nvm use 18.12.1
+    - npm install -g yarn
+    - yarn
+    - yarn build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'push'
+
+test:lint:
+  stage: test
+  allow_failure: false
+  script:
+    - echo Testowanie aplikacji na środowisko $CI_COMMIT_BRANCH
+    - echo CI_COMMIT_REF_SLUG $CI_COMMIT_REF_SLUG
+    - source ~/.bashrc
+    - nvm install 18.12.1
+    - nvm use 18.12.1
+    - npm install -g yarn
+    - yarn
+    - yarn lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'push'
+
+deploy:production:
+  stage: deploy
+  script:
+    - echo Wdrażanie aplikacji na środowisko $CI_COMMIT_BRANCH
+    - echo CI_COMMIT_REF_SLUG $CI_COMMIT_REF_SLUG
+    - source ~/.bashrc
+    - nvm install 18.12.1
+    - nvm use 18.12.1
+    - npm install -g yarn
+    - yarn
+    - yarn build
+    - OUTPUT_FILE=$(echo $CI_COMMIT_BRANCH)_$(date +%s).tar.gz
+    - tar -czf ../$OUTPUT_FILE .
+    - chmod 600 $PRIVATE_KEY
+    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -rp -i $PRIVATE_KEY ../$OUTPUT_FILE necodeo@necodeo.com:/var/www/shop.necodeo.com/deployments
+  environment:
+    name: production
+    url: https://shop.necodeo.com
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'push' && $CI_COMMIT_BRANCH == 'production'

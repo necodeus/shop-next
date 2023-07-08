@@ -1,0 +1,5 @@
+.productLink:hover ~ div .productLinkIcon,
+.productLinkIcon:hover {
+	color: white;
+	background-color: #dd9788;
+}

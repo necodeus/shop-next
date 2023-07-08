@@ -1,0 +1,21 @@
+/* Comments */
+.instagramLink > div:nth-child(1) {
+    transform: translateX(-32px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.instagramLink:hover > div:nth-child(1),
+.instagramLink:focus > div:nth-child(1) {
+    transform: translateX(0px) translateY(0px);
+}
+
+/* Likes */
+.instagramLink > div:nth-child(2) {
+    transform: translateX(32px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.instagramLink:hover > div:nth-child(2),
+.instagramLink:focus > div:nth-child(2) {
+    transform: translateX(0px) translateY(0px);
+}
