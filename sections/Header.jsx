@@ -1,9 +1,3 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { open as openOrderModal } from '../features/newOrder';
-import { open as openLoginModal } from '../features/signIn';
-
 import Link from 'next/link';
 
 import {
@@ -18,22 +12,23 @@ import {
 import css from '../styles/Header.module.css';
 import Logo from '../components/Logo';
 
-export default function HeaderSection({ navigation = [] }) {
-    const dispatch = useDispatch();
-
-	const [navState, setNavState] = useState(false);
-	const openNav = () => {setNavState(true)};
-	const closeNav = () => {setNavState(false)};
+export default function HeaderSection() {
+	const navigation = [
+		{ name: 'Strona główna', url: '/' },
+		{ name: 'Sklep', url: '/shop' },
+		{ name: 'O mnie', url: '/about' },
+		{ name: 'Kontakt', url: '/contact' },
+	];
 
 	return <header className="font-jost text-[16px] text-mineshaft">
 		<div className="z-[60] top-0 w-full">
 			<div className="flex justify-between items-center max-w-[1000px] mx-auto px-5">
-                <button className="flex py-6" onClick={() => {}}>
+                <button className="flex py-6">
                     <SearchIcon />
                     <div className="hidden md:block ml-3">Wyszukaj</div>
                 </button>
 				<div className="flex grow justify-end">
-					<div className="flex items-center py-6 cursor-pointer" onClick={ () => dispatch(openOrderModal()) }>
+					<div className="flex items-center py-6 cursor-pointer">
 						<CartIcon />
 						<div className="ml-3">
 							<div>
@@ -41,25 +36,25 @@ export default function HeaderSection({ navigation = [] }) {
 							</div>
 						</div>
 					</div>
-					<button className="ml-10 flex items-center py-6" onClick={ () => dispatch(openLoginModal()) }>
+					<button className="ml-10 flex items-center py-6">
 						<AccountIcon />
 						<div className="hidden md:block ml-3">
 							Konto
 						</div>
 					</button>
-					<button className="flex md:hidden ml-10 py-6 cursor-pointer" onClick={() => navState ? closeNav() : openNav()}>
-						{!navState && <ShowNavIcon />}
-						{navState && <HideNavIcon />}
+					<button className="flex md:hidden ml-10 py-6 cursor-pointer">
+						<ShowNavIcon />
+						<HideNavIcon />
 					</button>
 				</div>
 			</div>
 		</div>
 
-		{navState && <div className="md:hidden bg-white border-b border-solid border-white fixed w-full h-full top-0 z-50">
+		{<div className="md:hidden bg-white border-b border-solid border-white fixed w-full h-full top-0 z-50">
 			<div className="flex justify-end bg-wildsand">
-				<button className="flex mx-5 py-6 cursor-pointer" onClick={() => navState ? closeNav() : openNav()}>
-					{!navState && <ShowNavIcon />}
-					{navState && <HideNavIcon />}
+				<button className="flex mx-5 py-6 cursor-pointer">
+					<ShowNavIcon />
+					<HideNavIcon />
 				</button>
 			</div>
 			<div className="flex flex-col justify-start items-center max-w-[1000px] mx-auto px-5 overflow-auto  text-[20px] pt-[74px] h-[calc(100%-74px)]">
@@ -111,8 +106,8 @@ export default function HeaderSection({ navigation = [] }) {
 			</div>
 		</div>
 
-		<div className="text-center mb-[35px] px-5 text-[17px] font-domine leading-[2.5]" dangerouslySetInnerHTML={{__html: "BBiżuteria robiona z&nbsp;pasją, intencją i&nbsp;sercem z&nbsp;kamieni naturalnych.<br/>Idealna na prezent dla bliskiej Ci osoby"}}></div>
-		
+		<div className="text-center mb-[35px] px-5 text-[17px] font-domine leading-[2.5]" dangerouslySetInnerHTML={{__html: "Biżuteria robiona z&nbsp;pasją, intencją i&nbsp;sercem z&nbsp;kamieni naturalnych.<br/>Idealna na prezent dla bliskiej Ci osoby"}}></div>
+
 		<div className="hidden md:block md:bg-wildsand border-b-[1px] border-solid border-white">
             <div className="flex flex-col md:flex-row justify-between items-center max-w-[1000px] mx-auto lg:h-[70px] px-5 text-[20px]">
                 {navigation.map((link, index) => {

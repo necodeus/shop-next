@@ -12,62 +12,144 @@ import Heading from '../components/Heading';
 import Slider from '../sections/Slider';
 import ShopRecentProducts from '../sections/ProductsSlider';
 import InstagramPosts from '../sections/InstagramPosts';
-import { useSelector } from 'react-redux';
-
-const ModalLogin = dynamic(() => import('../modals/SignIn'), { ssr: false });
-const ModalNewOrder = dynamic(() => import('../modals/NewOrder'), { ssr: false });
-
-export async function getServerSideProps({ res }) {
-  let resp = {};
-
-  try {
-    resp = await fetch(process.env.API_URI + '/shop/views/index', {
-        headers: {
-            'Authorization': 'Bearer ' + process.env.API_USER_TOKEN, 
-            'Content-Type': 'application/json',
-        }
-    }).then(data => data.json());
-  } catch (e) {
-    console.log(e);
-  }
-
-  const { data, success, statusCode, message } = resp;
-
-  if (message) {
-    res.statusCode = statusCode;
-    return {
-        props: {
-          error: {
-              code: statusCode,
-              message: message,
-          },
-        },
-    }
-  }
-
-  return {
-      props: {
-        data,
-      }
-  }
-}
 
 export default function IndexView({ data, error }) {
-  return !error && <>
+  const navigation = {
+    main: [
+      {
+        title: "Strona główna",
+        slug: "/"
+      },
+      {
+        title: "Sklep",
+        slug: "/sklep"
+      },
+      {
+        title: "Blog",
+        slug: "/blog"
+      },
+      {
+        title: "Kontakt",
+        slug: "/kontakt"
+      },
+    ],
+    footer: [
+      {
+        title: "Strona główna",
+        slug: "/"
+      },
+      {
+        title: "Sklep",
+        slug: "/sklep"
+      },
+      {
+        title: "Blog",
+        slug: "/blog"
+      },
+      {
+        title: "Kontakt",
+        slug: "/kontakt"
+      }
+    ]
+  }
+
+  const breadcrumbs = [
+    {
+      title: "Strona główna",
+      slug: "/"
+    }
+  ]
+
+  const slides = [
+    {
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      image: "/slider.png",
+      link: "/"
+    },
+    {
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      image: "/slider.png",
+      link: "/"
+    },
+    {
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      image: "/slider.png",
+      link: "/"
+    },
+  ]
+
+  const instagram = [
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/343762488_3377568005842453_1903406461865234419_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=3635dc&_nc_ohc=uwKnSEOANDcAX85XrsT&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfAMgSSCUMlNNqX2C0jTc1EmdkuHJKiC7mUq3_yqo0cSIA&oe=65731E98",
+      link: "/"
+    },
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/342900327_1559726454517390_730820892228993508_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=3635dc&_nc_ohc=UcLW6zb9mbEAX90gozr&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfC6LtNo5ct49oYtR7CSObGpeWeF2l0Ie41uyVvonNb4wQ&oe=6574164A",
+      link: "/"
+    },
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/342035581_1273766190214869_8628086711174110929_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=3635dc&_nc_ohc=CPq27_rzwTgAX8ttfXq&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfBjaOghhRSAaVXyr5YqOVCHm2_OT8lu12rFsfBGcNPcVg&oe=6572FE38",
+      link: "/"
+    },
+
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/342035581_1273766190214869_8628086711174110929_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=3635dc&_nc_ohc=CPq27_rzwTgAX8ttfXq&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfBjaOghhRSAaVXyr5YqOVCHm2_OT8lu12rFsfBGcNPcVg&oe=6572FE38",
+      link: "/"
+    },
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/343762488_3377568005842453_1903406461865234419_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=3635dc&_nc_ohc=uwKnSEOANDcAX85XrsT&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfAMgSSCUMlNNqX2C0jTc1EmdkuHJKiC7mUq3_yqo0cSIA&oe=65731E98",
+      link: "/"
+    },
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/342900327_1559726454517390_730820892228993508_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=3635dc&_nc_ohc=UcLW6zb9mbEAX90gozr&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfC6LtNo5ct49oYtR7CSObGpeWeF2l0Ie41uyVvonNb4wQ&oe=6574164A",
+      link: "/"
+    },
+
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/342900327_1559726454517390_730820892228993508_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=3635dc&_nc_ohc=UcLW6zb9mbEAX90gozr&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfC6LtNo5ct49oYtR7CSObGpeWeF2l0Ie41uyVvonNb4wQ&oe=6574164A",
+      link: "/"
+    },
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/342035581_1273766190214869_8628086711174110929_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=3635dc&_nc_ohc=CPq27_rzwTgAX8ttfXq&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfBjaOghhRSAaVXyr5YqOVCHm2_OT8lu12rFsfBGcNPcVg&oe=6572FE38",
+      link: "/"
+    },
+    {
+      image: "https://scontent.fpoz4-1.fna.fbcdn.net/v/t39.30808-6/343762488_3377568005842453_1903406461865234419_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=3635dc&_nc_ohc=uwKnSEOANDcAX85XrsT&_nc_ht=scontent.fpoz4-1.fna&oh=00_AfAMgSSCUMlNNqX2C0jTc1EmdkuHJKiC7mUq3_yqo0cSIA&oe=65731E98",
+      link: "/"
+    },
+  ]
+
+  const navigations = [
+    {
+      title: "Strona główna",
+      slug: "/"
+    },
+    {
+      title: "Sklep",
+      slug: "/sklep"
+    },
+    {
+      title: "Blog",
+      slug: "/blog"
+    },
+    {
+      title: "Kontakt",
+      slug: "/kontakt"
+    }
+  ]
+
+  return <>
       <Head>
         <title>Strona główna</title>
         <meta name="description" content="Strona główna" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-  
-      {<ModalNewOrder />}
-      {<ModalLogin />}
 
-      <Header navigation={ data.navigations.main } />
-      <Breadcrumbs breadcrumbs={ data.breadcrumbs } />
+      <Header navigation={ navigation } />
+      <Breadcrumbs breadcrumbs={ breadcrumbs } />
 
       <Container className={["overflow-hidden", "md:overflow-unset"]}>
-        <Slider slides={ data.slides } />
+        <Slider slides={ slides } />
       </Container>
 
       <Container>
@@ -75,9 +157,9 @@ export default function IndexView({ data, error }) {
       </Container>
 
       <Container>
-        <InstagramPosts posts={ data.instagram } />
+        <InstagramPosts posts={ instagram } />
       </Container>
 
-      <Footer navigations={ data.navigations } />
-    </> || <Error code={ error.code } message={ error.message } />
+      <Footer navigations={ navigations } />
+    </>
 };

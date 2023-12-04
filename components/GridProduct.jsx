@@ -1,20 +1,9 @@
 import Link from "next/link";
 
 import Button from "./Button";
-
 import css from '../styles/ProductInShopCategory.module.css';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { open } from '../features/newOrder';
-import { addOrderProduct } from "../store/localData";
-import { getProducts } from '../store/shopData';
-
 export default function GridProduct({ category, product }) {
-    const dispatch = useDispatch();
-
-    const { products } = useSelector((state) => state.shopData);
-    const { orderProducts } = useSelector((state) => state.localData);
-
     return <div className="relative flex flex-col" >
         <div className="rounded-[17px] overflow-hidden">
             <img
@@ -34,15 +23,7 @@ export default function GridProduct({ category, product }) {
             <div className="flex justify-center items-end">{product.gross_price * 1} PLN</div>
         </div>
         <div className="text-center mb-3 text-[14px] flex justify-center items-center">
-            <Button clickHandler={async function () {
-                let a = products.map(item => item.id); // produkty już pobrane
-                let b = [...orderProducts.map(item => item.id), product.id]; // produkty z koszyka
-                let c = _.uniq(_.difference(b, a));
-
-                await dispatch(addOrderProduct({ id: product.id, quantity: 1 }));
-                await dispatch(getProducts(c));
-                await dispatch(open());
-            }}>Do koszyka</Button>
+            <Button>Do koszyka</Button>
             <Link href={"/shop/" + category.slug + '/' + product.slug}>
                 <a className={css.productLinkIcon + " mx-2 transition-colors relative z-10 inline-block px-3 py-3 font-semibold font-jost text-[#DD9788] bg-white rounded-[999px] border-2 border-solid border-[#DD9788] tracking-wider"}>
                     <svg

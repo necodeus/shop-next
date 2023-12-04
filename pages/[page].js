@@ -7,58 +7,79 @@ import Breadcrumbs from '../sections/Breadcrumbs';
 import Error from '../components/Error';
 import Container from '../components/Container';
 import Heading from '../components/Heading';
-import ModalLogin from '../modals/SignIn';
 
-const ModalNewOrder = dynamic(() => import('../modals/NewOrder'), { ssr: false });
-
-export async function getServerSideProps({ res, query }) {
-    const { success, statusCode, data, message } = await (await fetch(`${process.env.API_URI}/shop/views/${query.page}`, {
-        headers: {
-            'Authorization': 'Bearer ' + process.env.API_USER_TOKEN, 
-            'Content-Type': 'application/json',
-        }
-    })).json();
-
-    if (!success) {
-        res.statusCode = statusCode;
-        return {
-            props: {
-                error: {
-                    code: statusCode,
-                    message,
-                },
+export default function PageView() {
+    const navigation = {
+        main: [
+            {
+                title: "Strona główna",
+                slug: "/"
             },
-        }
+            {
+                title: "Sklep",
+                slug: "/sklep"
+            },
+            {
+                title: "Blog",
+                slug: "/blog"
+            },
+            {
+                title: "Kontakt",
+                slug: "/kontakt"
+            },
+        ],
+        footer: [
+            {
+                title: "Strona główna",
+                slug: "/"
+            },
+            {
+                title: "Sklep",
+                slug: "/sklep"
+            },
+            {
+                title: "Blog",
+                slug: "/blog"
+            },
+            {
+                title: "Kontakt",
+                slug: "/kontakt"
+            }
+        ]
     }
-    
-    return {
-        props: {
-            data,
+
+    const breadcrumbs = [
+        {
+            title: "Strona główna",
+            slug: "/"
         }
-    }
-}
+    ]
 
-export default function PageView({ data, error }) {
-    const page = data.pages.find(page => page.id === data.currentPage);
+    const title = "Strona";
 
-    return !error && <>
+    const content = `
+        <p>Strona</p>
+    `;
+
+    const navigations = navigation.footer;
+
+    const main = navigation.main;
+
+    return <>
         <Head>
-            <title>{ page.title }</title>
+            <title>{ title }</title>
             <meta name="description" content="Strona" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <ModalNewOrder />
-        <ModalLogin />
-
-        <Header navigation={data.navigations.main} />
-        <Breadcrumbs breadcrumbs={data.breadcrumbs} />
+        <Header navigation={main} />
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
 
         <Container>
-            <Heading>{ page.title }</Heading>
-            <div dangerouslySetInnerHTML={{__html: page.content}}></div>
+            <Heading>{ title }</Heading>
+            <div dangerouslySetInnerHTML={{__html: content}}></div>
         </Container>
 
-        <Footer navigations={data.navigations} />
-    </> || <Error code={error.code} message={error.message} />
+        <Footer navigations={navigations} />
+    </>
 };

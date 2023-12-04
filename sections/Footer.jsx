@@ -1,6 +1,37 @@
 import Link from "next/link";
 
-export default function FooterSection({ navigations }) {
+export default function FooterSection() {
+	const navigations = {
+		footer_product_categories: [
+			{ name: 'Zioła', url: '/shop' },
+			{ name: 'Kamienie', url: '/shop' },
+			{ name: 'Kryształy', url: '/shop' },
+			{ name: 'Różdżki', url: '/shop' },
+			{ name: 'Wisiorki', url: '/shop' },
+			{ name: 'Bransoletki', url: '/shop' },
+			{ name: 'Kolczyki', url: '/shop' },
+			{ name: 'Książki', url: '/shop' },
+			{ name: 'Pendrive', url: '/shop' },
+			{ name: 'Pozostałe', url: '/shop' },
+		],
+		footer_pages: [
+			{ name: 'Regulamin', url: '/regulamin' },
+			{ name: 'Polityka prywatności', url: '/polityka-prywatnosci' },
+			{ name: 'Polityka cookies', url: '/polityka-cookies' },
+			{ name: 'Odstąpienie od umowy', url: '/odstapienie-od-umowy' },
+			{ name: 'Reklamacje', url: '/reklamacje' },
+			{ name: 'Dostawa', url: '/dostawa' },
+			{ name: 'Płatności', url: '/platnosci' },
+			{ name: 'Kontakt', url: '/kontakt' },
+		],
+		footer_blog: [
+			{ name: 'Blog', url: '/blog' },
+			{ name: 'Wpisy', url: '/blog' },
+			{ name: 'Kategorie', url: '/blog' },
+			{ name: 'Tagi', url: '/blog' },
+		],
+	};
+
 	return <footer className="font-jost">
 		<div className="bg-wildsand text-mineshaft">
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-[1000px] mx-auto px-5 py-5 text-[18px]">
