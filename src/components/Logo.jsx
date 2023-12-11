@@ -9,8 +9,13 @@ export default function Logo({
     src="/logo.svg",
     imageClasses = "",
 }) {
-    return <Link href={link}>
-        <a className={linkClasses} target="_blank" rel="noopener">
+    return (
+        <Link
+            href={link}
+            className={linkClasses}
+            target="_blank"
+            rel="noopener"
+        >
             <img
                 alt={alt}
                 src={src}
@@ -18,6 +23,6 @@ export default function Logo({
                 height={height}
                 className={imageClasses}
             />
-        </a>
-    </Link>
+        </Link>
+    );
 };
