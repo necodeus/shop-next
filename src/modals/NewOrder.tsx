@@ -1,21 +1,14 @@
-import Select from '../components/Select';
-import InputWithButton from '../components/InputWithButton';
-
-import ModalHeader from '../components/ModalHeader';
-import Logo from '../components/Logo';
-import ModalProgress from '../components/ModalProgress';
-import ModalItem from '../components/ModalItem';
-import ModalFooter from '../components/ModalFooter';
-import ButtonGreen from '../components/ButtonGreen';
-import ModalItem2 from '../components/ModalItem2';
+import Select from '@/components/Select';
+import InputWithButton from '@/components/InputWithButton';
+import ModalHeader from '@/components/ModalHeader';
+import Logo from '@/components/Logo';
+import ModalProgress from '@/components/ModalProgress';
+import ModalItem from '@/components/ModalItem';
+import ButtonGreen from '@/components/ButtonGreen';
+import ModalItem2 from '@/components/ModalItem2';
 
 export default function NewOrderModal() {
-    const step = 0;
-    const orderProducts = [
-        { id: 1, quantity: 1 },
-        { id: 2, quantity: 2 },
-        { id: 3, quantity: 3 },
-    ];
+    const step: number = 0;
 
     return <div
         className="fixed top-0 bottom-0 left-0 right-0 flex justify-center items-start text-[#3b3b3b] overflow-y-auto z-50"

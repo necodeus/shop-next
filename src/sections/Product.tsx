@@ -1,7 +1,16 @@
-import Button from "../components/Button";
-import { open } from '../features/newOrder';
+import Button from "@/components/Button";
 
-export default function ProductSection({ currentProduct }) {
+import { ProductType } from "@/types/api";
+
+interface IProductSection {
+    currentProduct: ProductType;
+}
+
+export default function ProductSection({ currentProduct }: IProductSection) {
+    if (!currentProduct){
+        return <></>;
+    }
+
     return <div className="grid grid-cols-1 sm:grid-cols-[42%,minmax(0,1fr)] gap-5">
         <div className="mt-[20px] md:mt-0">
             <div>
@@ -15,22 +24,22 @@ export default function ProductSection({ currentProduct }) {
             </div>
         </div>
         <div className="mt-5 md:mt-0 text-[17px]">
-            <h1 className="font-semibold text-mineshaft text-[34px]">{ currentProduct?.name }</h1>
+            {currentProduct?.name && <h1 className="font-semibold text-mineshaft text-[34px]">{ currentProduct.name }</h1>}
 
-            <div className="my-[20px]">{ currentProduct?.description }</div>
+            {currentProduct?.description && <div className="my-[20px]">{ currentProduct.description }</div>}
 
             <div className="flex items-center">
                 <div className="font-semibold mr-5">
                     <Button>Do koszyka</Button>
                 </div>
-                <div className="font-semibold mt-[20px]">
+                {currentProduct?.gross_price && <div className="font-semibold mt-[20px]">
                     <div className="text-[15px]">Cena brutto:</div>
                     <div className="flex items-end mb-1">
                         <div className="text-[24px]">
-                            { currentProduct?.gross_price * 1 } PLN
+                            { currentProduct.gross_price } PLN
                         </div>
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
     </div>;

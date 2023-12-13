@@ -1,4 +1,4 @@
-export default function Button({ children, clickHandler }) {
+export default function Button({ children }: any) {
     return <div>
         <button
             className={[
@@ -21,7 +21,6 @@ export default function Button({ children, clickHandler }) {
                 "border-[#DD9788]",
                 "tracking-wider",
             ].join(' ')}
-            onClick={ clickHandler }
         >{ children }</button>
     </div>;
 };

@@ -1,6 +1,5 @@
-import Heading from "../components/Heading";
-import CheckboxIcon from "../components/Icons/CheckboxIcon";
-import CheckboxEnabledIcon from "../components/Icons/CheckboxEnabledIcon";
+import Heading from "@/components/Heading";
+import CheckboxEnabledIcon from "@/components/Icons/CheckboxEnabledIcon";
 
 export default function CategoryFilterSection() {
     return <div className="max-w-[1000px] mx-auto px-5 my-[35px] text-mineshaft font-jost">
@@ -21,7 +20,6 @@ export default function CategoryFilterSection() {
                                     value="1"
                                 />
                                 <div className="custom-checkbox flex justify-center items-center">
-                                    {/* <CheckboxIcon /> */}
                                     <CheckboxEnabledIcon />
                                 </div>
                                 <label className="pl-2">xxxx</label>

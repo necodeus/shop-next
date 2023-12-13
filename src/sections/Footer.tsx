@@ -23,6 +23,7 @@ export default function FooterSection(): any {
 			{ name: 'Dostawa', url: '/dostawa' },
 			{ name: 'Płatności', url: '/platnosci' },
 			{ name: 'Kontakt', url: '/kontakt' },
+			{ name: 'HELLO', url: '/hello-world' },
 		],
 		footer_blog: [
 			{ name: 'Blog', url: '/blog' },

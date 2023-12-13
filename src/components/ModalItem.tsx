@@ -24,7 +24,7 @@ export default function ModalItem({
                 onDecrease={onDecrease}
                 onChange={onChange}
                 placeholder="0"
-                value={quantity}
+                value={`${quantity}`}
             />
         </div>
     </div>;

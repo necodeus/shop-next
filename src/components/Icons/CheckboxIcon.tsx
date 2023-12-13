@@ -1,9 +1,8 @@
-export default function CheckboxIcon({ className }) {
+export default function CheckboxIcon({ width = '20px', height = '20px' }) {
     return <svg
         width={ width }
         height={ height }
         viewBox="0 0 14 14"
-        className={ className }
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >

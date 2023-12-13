@@ -36,7 +36,7 @@ export default function SignInModal() {
                     </div>
 
                     <div className="px-[19px] pb-[19px]">
-                        <SlideSelect selected={loginMethod} options={loginMethods}  />
+                        <SlideSelect />
                     </div>
 
                     <div className="flex flex-col justify-between px-[19px] py-[19px] bg-[#eee]">

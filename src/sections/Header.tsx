@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { Domine } from 'next/font/google'
+
+const domine = Domine({ subsets: ['latin', 'latin-ext'] })
 
 import {
 	ShoppingCart as CartIcon,
@@ -113,7 +116,14 @@ export default function HeaderSection() {
                 </div>
             </div>
 
-            <div className="text-center mb-[35px] px-5 text-[17px] font-domine leading-[2.5]" dangerouslySetInnerHTML={{__html: "Biżuteria robiona z&nbsp;pasją, intencją i&nbsp;sercem z&nbsp;kamieni naturalnych.<br/>Idealna na prezent dla bliskiej Ci osoby"}}></div>
+            <div className={[
+                'text-center',
+                'mb-[35px]',
+                'px-5',
+                'text-[17px]',
+                'leading-[2.5]',
+                domine.className,
+            ].join(' ')} dangerouslySetInnerHTML={{__html: "Biżuteria robiona z&nbsp;pasją, intencją i&nbsp;sercem z&nbsp;kamieni naturalnych.<br/>Idealna na prezent dla bliskiej Ci osoby"}}></div>
 
             <div className="hidden md:block md:bg-wildsand border-b-[1px] border-solid border-white">
                 <div className="flex flex-col md:flex-row justify-between items-center max-w-[1000px] mx-auto lg:h-[70px] px-5 text-[20px]">

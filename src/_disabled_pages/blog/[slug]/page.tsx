@@ -2,8 +2,8 @@
 import Breadcrumbs from '@/sections/Breadcrumbs';
 import Footer from '@/sections/Footer';
 import Header from '@/sections/Header';
-import Heading from '@/components/Heading';
 import Container from '@/components/Container';
+import Heading from '@/components/Heading';
 
 export default function BlogPostView() {
     const breadcrumbs: any = [
@@ -30,10 +30,12 @@ export default function BlogPostView() {
 
     return  <>
         <Header />
+
         <Breadcrumbs breadcrumbs={breadcrumbs} />
 
         <Container>
             <Heading>{title}</Heading>
+
             <div dangerouslySetInnerHTML={{__html: content}}></div>
         </Container>
 

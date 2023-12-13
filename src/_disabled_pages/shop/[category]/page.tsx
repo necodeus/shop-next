@@ -14,12 +14,9 @@ export default function ShopCategoryView() {
         { id: 3, name: 'Kategoria 1', href: '/shop/kategoria-1' },
     ];
 
-    const category = {
-        name: 'Kategoria 1',
-    };
-
     const products = [
         {
+            id: '1',
             name: 'Produkt 1',
             price: 100,
             images: [
@@ -32,6 +29,7 @@ export default function ShopCategoryView() {
             ],
         },
         {
+            id: '2',
             name: 'Produkt 2',
             price: 200,
             images: [
@@ -44,6 +42,7 @@ export default function ShopCategoryView() {
             ],
         },
         {
+            id: '3',
             name: 'Produkt 3',
             price: 300,
             images: [
@@ -56,6 +55,7 @@ export default function ShopCategoryView() {
             ],
         },
         {
+            id: '4',
             name: 'Produkt 4',
             price: 400,
             images: [
@@ -68,6 +68,7 @@ export default function ShopCategoryView() {
             ],
         },
         {
+            id: '5',
             name: 'Produkt 5',
             price: 500,
             images: [
@@ -80,6 +81,7 @@ export default function ShopCategoryView() {
             ],
         },
         {
+            id: '6',
             name: 'Produkt 6',
             price: 600,
             images: [
@@ -95,16 +97,17 @@ export default function ShopCategoryView() {
 
     return <>
         <Header />
+
         <Breadcrumbs breadcrumbs={breadcrumbs} />
 
         <Container>
-            <Heading>{category.name}</Heading>
+            <Heading>Kategoria 1</Heading>
         </Container>
 
         <Container>
             <GridContainer>
-                {products.map((product: any, index: any) =>
-                    <GridProduct key={index} category={category} product={product} />
+                {products.map((product: any) =>
+                    <GridProduct key={product.id} category={{ slug: 'category' }} product={product} />
                 )}
             </GridContainer>
         </Container>

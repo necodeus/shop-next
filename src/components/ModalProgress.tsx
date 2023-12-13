@@ -1,4 +1,10 @@
-export default function ModalProgress({ stages, activeStage }) {
+interface IModalProgress {
+    stages: string[];
+}
+
+const ModalProgress = ({ stages = [] }: IModalProgress) => {
+    const activeStage = 1;
+
     return <div>
         <div className="bg-[#eee] min-h-[4px] flex rounded-[999px] overflow-hidden">
             <div className="min-h-[4px] bg-[#6ff58d] transition-[width] duration-300 ease-in-out" style={{ width: ((activeStage * 100 / stages.length) || 0) + '%' }}></div>
@@ -18,3 +24,5 @@ export default function ModalProgress({ stages, activeStage }) {
         </div>
     </div>
 };
+
+export default ModalProgress;

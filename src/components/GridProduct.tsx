@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "./Button";
 import css from './ProductInShopCategory.module.css';
 
-export default function GridProduct({ category, product }) {
+export default function GridProduct({ category, product }: any) {
     return (
         <div className="relative flex flex-col" >
             <div className="rounded-[17px] overflow-hidden">
