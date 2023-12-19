@@ -38,7 +38,7 @@ jobs:
       - name: Archive Built Output
         run: |
           cd build
-          tar -czf ../${{ env.ARCHIVE_NAME }} *
+          tar -czf ../${{ env.ARCHIVE_NAME }} * .??*
           cd ..
 
       - name: Get Release Upload URL
