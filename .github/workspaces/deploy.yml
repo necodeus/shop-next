@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.9.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Semantic Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Setup Environment Variables for Artifacts
+        run: echo "ARCHIVE_NAME=production_output_$(date +%s).tar.gz" >> $GITHUB_ENV
+
+      - name: Archive Built Output
+        run: |
+          cd build
+          tar -czf ../${{ env.ARCHIVE_NAME }} *
+          cd ..
+
+      - name: Get Release Upload URL
+        run: |
+          URL=$(curl -H "Authorization: token ${{ secrets.PAT }}" \
+              https://api.github.com/repos/${{ github.repository }}/releases/latest \
+              | jq -r '.upload_url')
+          echo "UPLOAD_URL=${URL}" >> $GITHUB_ENV
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          upload_url: ${{ env.UPLOAD_URL }}
+          asset_path: ${{ env.ARCHIVE_NAME }}
+          asset_name: ${{ env.ARCHIVE_NAME }}
+          asset_content_type: application/gzip

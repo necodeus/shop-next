@@ -43,11 +43,11 @@ function getPageBySlug(slug: string) {
 export default async function BlogPostView(props: any) {
     const slug = props.params.slug.join("/");
 
-    const { data, isLoading } = await getPageBySlug('/' + slug);
+    const { data, isLoading: isPageLoading } = await getPageBySlug('/' + slug);
 
     console.log({
         data,
-        isLoading
+        isPageLoading
     });
 
     const type: any = "POST";
@@ -66,26 +66,24 @@ export default async function BlogPostView(props: any) {
             }
         ] as any} />
 
-        {!isLoading && <div>Loading</div> || <div>{ data }</div>}
+        {type === "POST" && <Container>
+            <Heading>STRONA</Heading>
+
+            <div dangerouslySetInnerHTML={{__html: `
+                <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            `}}></div>
+        </Container>}
+
+        {type === "SHOP_INDEX" && <Container>
+            <Heading>SHOP INDEX</Heading>
+
+            <div dangerouslySetInnerHTML={{__html: `
+                <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            `}}></div>
+        </Container>}
 
         <Footer />
     </>
 };
-
-// {type === "POST" && <Container>
-//     <Heading>STRONA</Heading>
-
-//     <div dangerouslySetInnerHTML={{__html: `
-//         <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
-//         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-//     `}}></div>
-// </Container>}
-
-// {type === "SHOP_INDEX" && <Container>
-//     <Heading>SKLEP - INDEX</Heading>
-
-//     <div dangerouslySetInnerHTML={{__html: `
-//         <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
-//         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-//     `}}></div>
-// </Container>}

@@ -1,12 +1,13 @@
 {
-  "name": "shopp",
-  "version": "0.1.0",
+  "name": "shop",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:mkdir": "mkdir \"./build/public/_next/static/\" || true",
+    "build:cp": "cp -a ./.next/standalone/. ./build/ && cp -a ./public/. ./build/public/ && cp -a ./.next/static/. ./build/public/_next/static/",
+    "build": "next build && npm run build:mkdir && npm run build:cp",
+    "start": "cross-env HOSTNAME=0.0.0.0 node ./build/server.js"
   },
   "dependencies": {
     "next": "14.0.4",
@@ -16,13 +17,23 @@
     "swiper": "^11.0.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.5",
+    "@semantic-release/release-notes-generator": "^12.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "husky": "^8.0.3",
     "postcss": "^8",
+    "semantic-release": "^22.0.12",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
