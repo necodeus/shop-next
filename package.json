@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "lint": "next lint",
-    "build:mkdir": "mkdir -r ./build/public/_next/static/ || true",
+    "build:mkdir": "mkdir -p ./build/public/_next/static/ || true",
     "build:cp": "cp -a ./.next/standalone/. ./build/ && cp -a ./public/. ./build/public/ && cp -a ./.next/static/. ./build/public/_next/static/",
     "build": "next build && npm run build:mkdir && npm run build:cp",
     "start": "cross-env HOSTNAME=0.0.0.0 node ./build/server.js"
