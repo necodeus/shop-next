@@ -24,7 +24,7 @@ jobs:
       - name: Semantic Release
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
         run: npm install
@@ -43,7 +43,7 @@ jobs:
 
       - name: Get Release Upload URL
         run: |
-          URL=$(curl -H "Authorization: token ${{ secrets.PAT }}" \
+          URL=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${{ github.repository }}/releases/latest \
               | jq -r '.upload_url')
           echo "UPLOAD_URL=${URL}" >> $GITHUB_ENV
@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         if: success()
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ env.UPLOAD_URL }}
           asset_path: ${{ env.ARCHIVE_NAME }}
